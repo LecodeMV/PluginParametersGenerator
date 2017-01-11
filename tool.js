@@ -1,6 +1,6 @@
 
 window.onload = function () {
-    console.log("LOADED !");
+
     makeSpacesAfterCapitalLetters = function (text) {
         return text.replace(/([A-Z])/g, function (letter) {
             return " " + letter;
@@ -9,7 +9,7 @@ window.onload = function () {
         });
     };
 
-    work = function() {
+    work = function () {
 
         let output_parameters = "";
         let output_header = "*";
@@ -70,13 +70,20 @@ window.onload = function () {
         document.getElementById('header').value = output_header;
     };
 
-    clearBoxes = function() {
+    clearBoxes = function () {
         document.getElementById('data').value = "";
         document.getElementById('code').value = "";
         document.getElementById('header').value = "";
     };
 
-    example = function() {
-
+    example = function () {
+        var text = "Lecode.MagicSteps.goldGain = 30;    // (Gold): Amount of gold obtained.\n" +
+            "Lecode.MagicSteps.requiredSteps = 5;    // (): Required steps to gain rewards.\n" +
+            "Lecode.MagicSteps.allowedMaps = \"[2,5,8]\";\n" +
+            "// Divider: -- Window --\n" +
+            "Lecode.MagicSteps.windowTitle = \"Magic Steps Effects\";\n" +
+            "Lecode.MagicSteps.showWindow = false;   // (Show Notification ?):\n";
+        document.getElementById('data').value = text;
+        work();
     };
 };
