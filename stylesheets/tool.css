@@ -4,6 +4,10 @@ body {
     background-color: #2F3241;
 }
 
+section {
+    width: 70%;
+}
+
 .container {
     display: inline-block;
 }
