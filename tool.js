@@ -1,10 +1,20 @@
 
 window.onload = function () {
 
-    var dataBox = CodeMirror.fromTextArea(document.getElementById('data'));
-    var headerBox = CodeMirror.fromTextArea(document.getElementById('header'));
-    var codeBox = CodeMirror.fromTextArea(document.getElementById('code'));
-    console.log("dataBox:" ,dataBox);
+    var dataBox = CodeMirror.fromTextArea(dataBox, {
+        theme: "base16-dark",
+        mode: {name: "javascript", json: true}
+    });
+    var headerBox = CodeMirror.fromTextArea(headerBox, {
+        theme: "base16-dark",
+        readOnly: true,
+        mode: {name: "javascript", json: true}
+    });
+    var codeBox = CodeMirror.fromTextArea(codeBox, {
+        theme: "base16-dark",
+        readOnly: true,
+        mode: {name: "javascript", json: true}
+    });
 
     makeSpacesAfterCapitalLetters = function (text) {
         return text.replace(/([A-Z])/g, function (letter) {
@@ -19,7 +29,7 @@ window.onload = function () {
         let output_parameters = "";
         let output_header = "*";
 
-        let data = document.getElementById('data').value;
+        let data = dataBox.value;
         let lines = data.split("\n");
         let module = "UnknowModule";
         if (lines[0].match(/(.+)\.(.+)\s*=\s*(.+);/i)) {
@@ -71,14 +81,14 @@ window.onload = function () {
                 output_parameters += "\n";
             }
         }
-        document.getElementById('code').value = output_parameters;
-        document.getElementById('header').value = output_header;
+        codeBox.value = output_parameters;
+        headerBox.value = output_header;
     };
 
     clearBoxes = function () {
-        document.getElementById('data').value = "";
-        document.getElementById('code').value = "";
-        document.getElementById('header').value = "";
+        dataBox.value = "";
+        codeBox.value = "";
+        headerBox.value = "";
     };
 
     example = function () {
@@ -88,7 +98,7 @@ window.onload = function () {
             "// Divider: -- Window --\n" +
             "Lecode.MagicSteps.windowTitle = \"Magic Steps Effects\";\n" +
             "Lecode.MagicSteps.showWindow = false;   // (Show Notification ?):\n";
-        document.getElementById('data').value = text;
+        dataBox.value = text;
         work();
     };
 };
