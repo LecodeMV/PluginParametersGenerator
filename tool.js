@@ -27,7 +27,7 @@ window.onload = function () {
         let output_parameters = "";
         let output_header = "*";
 
-        let data = dataBox.value;
+        let data = dataBox.getDoc().getValue();
         let lines = data.split("\n");
         let module = "UnknowModule";
         if (lines[0].match(/(.+)\.(.+)\s*=\s*(.+);/i)) {
