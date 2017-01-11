@@ -66,8 +66,10 @@ window.onload = function () {
                     output_result = "Number(parameters[\"" + readableName + "\"] || " + result + ")";
                 } else if (result.match(/String\((.+)\)/) || result.match(/Number\((.+)\)/)) {
                     output_result = result;
-                } else if (result.match(/\|\|\s*(.+)/i)) {
+                } else if (result.match(/\|\|\s*(.+)\s*\)/i)) {
+                    console.log("result:" ,result);
                     output_result = RegExp.$1;
+                    console.log("output_result:" ,output_result);
                 } else {
                     output_result = "String(parameters[\"" + readableName + "\"] || \"" + result + "\")";
                 }
