@@ -1,5 +1,5 @@
 
-window.onload = function () { 
+window.onload = function () {  
 
     var dataBox = CodeMirror.fromTextArea(document.getElementById("data"), {
         theme: "base16-dark",
