@@ -55,7 +55,8 @@ window.onload = function () {
                 }
                 result = result.replace(";", "").replace(/\/\/(.+)/ig, "");
 
-                result = result.trim().replace(/\"/ig, "");
+                if (!result.match(/\|\|\s*(.+)\s*\)/i))
+                    result = result.trim().replace(/\"/ig, "");
                 readableName = readableName.trim();
                 name = name.trim();
 
