@@ -4,13 +4,9 @@ body {
     background-color: #2F3241;
 }
 
-section {
+#container {
     width: 70%;
     margin: auto;
-}
-
-#container {
-    display: inline-block;
 }
 
 .form-control {
