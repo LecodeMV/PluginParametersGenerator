@@ -1,4 +1,4 @@
-section {
+body {
     font-family: 'Montserrat', sans-serif;
     color: #74B1BE;
     background-color: #2F3241;
@@ -6,4 +6,8 @@ section {
 
 .container {
     display: inline-block;
+}
+
+textarea {
+    font-size: 12px;
 }

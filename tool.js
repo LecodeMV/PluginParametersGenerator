@@ -1,6 +1,6 @@
 
 window.onload = function () {
-    
+
     makeSpacesAfterCapitalLetters = function (text) {
         return text.replace(/([A-Z])/g, function (letter) {
             return " " + letter;
@@ -9,7 +9,7 @@ window.onload = function () {
         });
     };
 
-    function work() {
+    work = function() {
 
         let output_parameters = "";
         let output_header = "*";
