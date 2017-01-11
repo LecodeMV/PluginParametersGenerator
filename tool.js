@@ -60,6 +60,7 @@ window.onload = function () {
                 name = name.trim();
 
                 var output_result = "";
+                console.log("result:" ,result);
                 if (result === "true" || result === "false") {
                     output_result = "String(parameters[\"" + readableName + "\"] || '" + result + "') === 'true'";
                 } else if (!isNaN(result)) {
