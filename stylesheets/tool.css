@@ -8,6 +8,10 @@ body {
     display: inline-block;
 }
 
-textarea {
+.form-control {
     font-size: 12px;
+}
+
+label {
+    font-size: 14px;
 }

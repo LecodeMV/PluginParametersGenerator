@@ -1,6 +1,6 @@
 
 window.onload = function () {
-
+    console.log("LOADED !");
     makeSpacesAfterCapitalLetters = function (text) {
         return text.replace(/([A-Z])/g, function (letter) {
             return " " + letter;
@@ -68,9 +68,9 @@ window.onload = function () {
         }
         document.getElementById('code').value = output_parameters;
         document.getElementById('header').value = output_header;
-    }
+    };
 
-    clear = function() {
+    clearBoxes = function() {
         document.getElementById('data').value = "";
         document.getElementById('code').value = "";
         document.getElementById('header').value = "";
