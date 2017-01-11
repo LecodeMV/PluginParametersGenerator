@@ -1,7 +1,10 @@
 
 window.onload = function () {
 
-    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('data'));
+    var dataBox = CodeMirror.fromTextArea(document.getElementById('data'));
+    var headerBox = CodeMirror.fromTextArea(document.getElementById('header'));
+    var codeBox = CodeMirror.fromTextArea(document.getElementById('code'));
+    console.log("dataBox:" ,dataBox);
 
     makeSpacesAfterCapitalLetters = function (text) {
         return text.replace(/([A-Z])/g, function (letter) {
