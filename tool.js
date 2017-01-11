@@ -69,4 +69,14 @@ window.onload = function () {
         document.getElementById('code').value = output_parameters;
         document.getElementById('header').value = output_header;
     }
+
+    clear = function() {
+        document.getElementById('data').value = "";
+        document.getElementById('code').value = "";
+        document.getElementById('header').value = "";
+    };
+
+    example = function() {
+
+    };
 };
