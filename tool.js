@@ -61,8 +61,8 @@ window.onload = function () {
 
                 var output_result = "";
                 if (result.match(/\|\|\s*(.+)\s*\)/i)) {
-                    output_result = result.replace(/\"/ig, "").replace(/'/ig, "");
-                    result = RegExp.$1;
+                    output_result = result;
+                    result = RegExp.$1.replace(/\"/ig, "").replace(/'/ig, "");
                 } else if (result === "true" || result === "false") {
                     output_result = "String(parameters[\"" + readableName + "\"] || '" + result + "') === 'true'";
                 } else if (!isNaN(result)) {
