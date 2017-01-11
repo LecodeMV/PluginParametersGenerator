@@ -7,12 +7,10 @@ window.onload = function () {
     });
     var headerBox = CodeMirror.fromTextArea(document.getElementById("header"), {
         theme: "base16-dark",
-        readOnly: true,
         mode: {name: "javascript", json: true}
     });
     var codeBox = CodeMirror.fromTextArea(document.getElementById("code"), {
         theme: "base16-dark",
-        readOnly: true,
         mode: {name: "javascript", json: true}
     });
 

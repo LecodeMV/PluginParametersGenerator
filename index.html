@@ -19,22 +19,31 @@
 
 <body>
   <div class="content">
+    <h3>Rules</h3>
+    <p>
+      <span class="code">ModuleName.something = value;  // (Name): Description</span>
+      If Name is missing, it is automatically generated based on the object name.
+      <span class="code">ModuleName.bananaAndOrange = value;  // (): ...</span> => <span class="code">Banana And Orange</span>.
+      Description is also optional. It will be empty.
+      <span class="code">ModuleName.something = value;  // (Name):</span>
+    </p>
+    <br>
     <div class="form-group">
       <label for="comment">Insert your data:</label>
       <textarea class="form-control" rows="10" id="data"></textarea>
     </div>
     <button type="button" class="btn btn-primary btn-block" onClick="work()">Generate</button>
-    <button type="button" class="btn btn-danger btn-block" onClick="clearBoxes()">Clear</button>
-    <button type="button" class="btn btn-default btn-block" onClick="example()">See example</button>
-    <div class="form-group">
-      <label for="comment">Header output:</label>
-      <textarea class="form-control" rows="10" id="header"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="comment">Code output:</label>
-      <textarea class="form-control" rows="10" id="code"></textarea>
-    </div>
-  </div>
+<button type="button" class="btn btn-danger btn-block" onClick="clearBoxes()">Clear</button>
+<button type="button" class="btn btn-default btn-block" onClick="example()">See example</button>
+<div class="form-group">
+  <label for="comment">Header output:</label>
+  <textarea class="form-control" rows="10" id="header"></textarea>
+</div>
+<div class="form-group">
+  <label for="comment">Code output:</label>
+  <textarea class="form-control" rows="10" id="code"></textarea>
+</div>
+</div>
 </body>
 
 </html>
