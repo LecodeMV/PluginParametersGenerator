@@ -1,16 +1,16 @@
 
 window.onload = function () {
 
-    var dataBox = CodeMirror.fromTextArea(dataBox, {
+    var dataBox = CodeMirror.fromTextArea(document.getElementById("data"), {
         theme: "base16-dark",
         mode: {name: "javascript", json: true}
     });
-    var headerBox = CodeMirror.fromTextArea(headerBox, {
+    var headerBox = CodeMirror.fromTextArea(document.getElementById("header"), {
         theme: "base16-dark",
         readOnly: true,
         mode: {name: "javascript", json: true}
     });
-    var codeBox = CodeMirror.fromTextArea(codeBox, {
+    var codeBox = CodeMirror.fromTextArea(document.getElementById("code"), {
         theme: "base16-dark",
         readOnly: true,
         mode: {name: "javascript", json: true}
