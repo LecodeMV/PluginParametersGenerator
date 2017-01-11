@@ -1,5 +1,5 @@
 
-window.onload = function () {  
+window.onload = function () {
 
     var dataBox = CodeMirror.fromTextArea(document.getElementById("data"), {
         theme: "base16-dark",
@@ -81,14 +81,14 @@ window.onload = function () {
                 output_parameters += "\n";
             }
         }
-        codeBox.value = output_parameters;
-        headerBox.value = output_header;
+        codeBox.getDoc().setValue(output_parameters);
+        headerBox.getDoc().setValue(output_header);
     };
 
     clearBoxes = function () {
-        dataBox.value = "";
-        codeBox.value = "";
-        headerBox.value = "";
+        dataBox.getDoc().setValue("");
+        codeBox.getDoc().setValue("");
+        headerBox.getDoc().setValue("");
     };
 
     example = function () {
@@ -98,7 +98,7 @@ window.onload = function () {
             "// Divider: -- Window --\n" +
             "Lecode.MagicSteps.windowTitle = \"Magic Steps Effects\";\n" +
             "Lecode.MagicSteps.showWindow = false;   // (Show Notification ?):\n";
-        dataBox.value = text;
+        dataBox.getDoc().setValue(text);
         work();
     };
 };
