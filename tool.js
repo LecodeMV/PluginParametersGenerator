@@ -1,6 +1,8 @@
 
 window.onload = function () {
 
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('data'));
+
     makeSpacesAfterCapitalLetters = function (text) {
         return text.replace(/([A-Z])/g, function (letter) {
             return " " + letter;
