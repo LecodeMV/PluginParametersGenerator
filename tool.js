@@ -61,18 +61,18 @@ window.onload = function () {
 
                 var output_result = "";
                 console.log("result:" ,result);
-                if (result === "true" || result === "false") {
-                    output_result = "String(parameters[\"" + readableName + "\"] || '" + result + "') === 'true'";
-                } else if (!isNaN(result)) {
-                    output_result = "Number(parameters[\"" + readableName + "\"] || " + result + ")";
-                } else if (result.match(/String\((.+)\)/) || result.match(/Number\((.+)\)/)) {
-                    output_result = result;
-                } else if (result.match(/\|\|\s*(.+)\s*\)/i)) {
+                if (result.match(/\|\|\s*(.+)\s*\)/i)) {
                     console.log("before - result:" ,result);
                     result = RegExp.$1;
                     console.log("after - result:" ,result);
                     output_result = result;
                     console.log("output_result:" ,output_result);
+                } else if (result === "true" || result === "false") {
+                    output_result = "String(parameters[\"" + readableName + "\"] || '" + result + "') === 'true'";
+                } else if (!isNaN(result)) {
+                    output_result = "Number(parameters[\"" + readableName + "\"] || " + result + ")";
+                } else if (result.match(/String\((.+)\)/) || result.match(/Number\((.+)\)/)) {
+                    output_result = result;
                 } else {
                     output_result = "String(parameters[\"" + readableName + "\"] || \"" + result + "\")";
                 }
