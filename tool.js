@@ -1,187 +1,72 @@
 
 window.onload = function () {
-
-    var squareSize = 25;
-
-    function createSquare(value) {
-        var square = document.createElement("div");
-        square.style.width = squareSize + "px";
-        square.style.height = squareSize + "px";
-        square.style.margin = "2px";
-        if (value) {
-            square.className = "square-fill";
-        } else {
-            square.className = "square";
-        }
-        if (value > 1)
-            square.id = "square-center";
-        square.onclick = function (e) {
-            var element = e.target;
-            if (element.className === "square")
-                element.className = "square-fill";
-            else
-                element.className = "square";
-        };
-        return square;
-    }
-
-    function createLineDiv() {
-        var lineDiv = document.createElement("div");
-        //-- ?
-        return lineDiv;
-    }
-
-    function initializeSquares() {
-        var map = [
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 2, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0]
-        ];
-        var zone = document.getElementById("squares");
-        for (var i = 0; i < map.length; i++) {
-            var line = map[i];
-            var lineDiv = createLineDiv();
-            for (var j = 0; j < line.length; j++) {
-                var value = line[j];
-                var square = createSquare(value);
-                lineDiv.appendChild(square);
-            }
-            zone.appendChild(lineDiv);
-        }
-    }
-
-    function linesNbr() {
-        return document.getElementById("squares").children.length;
-    }
-
-    function columnsNbr() {
-        return document.getElementById("squares").children[0].children.length;
-    }
-
-    var zone = document.getElementById("squares");
-
-    var heightPlus = document.getElementById("h+");
-    heightPlus.onclick = function (e) {
-        var lineDiv_1 = createLineDiv();
-        var lineDiv_2 = createLineDiv();
-        var nbr = columnsNbr();
-        for (var i = 0; i < nbr; i++) {
-            lineDiv_1.appendChild(createSquare(0));
-            lineDiv_2.appendChild(createSquare(0));
-        }
-        zone.insertBefore(lineDiv_1, zone.children[0]);
-        zone.insertBefore(lineDiv_2, null);
-    };
-    var heightMinus = document.getElementById("h-");
-    heightMinus.onclick = function (e) {
-        if (linesNbr() > 3) {
-            zone.children[0].remove();
-            zone.children[zone.children.length - 1].remove();
-        }
+    
+    makeSpacesAfterCapitalLetters = function (text) {
+        return text.replace(/([A-Z])/g, function (letter) {
+            return " " + letter;
+        }).replace(/\b(.)/ig, function (letter) {
+            return letter[0].toUpperCase();
+        });
     };
 
-    var widthPlus = document.getElementById("w+");
-    widthPlus.onclick = function (e) {
-        for (var i = 0; i < zone.children.length; i++) {
-            var lineDiv = zone.children[i];
-            lineDiv.insertBefore(createSquare(0), lineDiv.children[0]);
-            lineDiv.insertBefore(createSquare(0), null);
-        }
-    };
-    var widthMinus = document.getElementById("w-");
-    widthMinus.onclick = function (e) {
-        if (columnsNbr() > 3) {
-            for (var i = 0; i < zone.children.length; i++) {
-                var lineDiv = zone.children[i];
-                lineDiv.children[0].remove();
-                lineDiv.children[lineDiv.children.length - 1].remove();
-            }
-        }
-    };
+    function work() {
 
-    var zoomPlus = document.getElementById("z+");
-    zoomPlus.onclick = function (e) {
-        if (squareSize < 50) {
-            squareSize += 5;
-            for (var i = 0; i < zone.children.length; i++) {
-                var lineDiv = zone.children[i];
-                for (var j = 0; j < lineDiv.children.length; j++) {
-                    var div = lineDiv.children[j];
-                    div.style.width = squareSize + "px";
-                    div.style.height = squareSize + "px";
+        let output_parameters = "";
+        let output_header = "*";
+
+        let data = document.getElementById('data').value;
+        let lines = data.split("\n");
+        let module = "UnknowModule";
+        if (lines[0].match(/(.+)\.(.+)\s*=\s*(.+);/i)) {
+            module = RegExp.$1;
+        }
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            line = line.replace(module, "#");
+            if (line.match(/\#\.(.+)\s*=\s*(.+)/i)) {
+                let name = RegExp.$1;
+                let result = RegExp.$2;
+                let readableName = "";
+                let description = "...";
+                let output_end = "";
+                if (result.match(/\/\/\s*\((.*)\)\s*:\s*(.*)/i)) {
+                    readableName = RegExp.$1;
+                    description = RegExp.$2;
+                    output_end = "\t//\t(" + readableName + "): " + description;
+                    if (readableName.length <= 0)
+                        readableName = makeSpacesAfterCapitalLetters(name);
+                    if (description.length <= 0)
+                        description = "...";
+                } else {
+                    readableName = makeSpacesAfterCapitalLetters(name);
                 }
-            }
-        }
-    };
-    var zoomMinus = document.getElementById("z-");
-    zoomMinus.onclick = function (e) {
-        if (squareSize > 10) {
-            squareSize -= 5;
-            for (var i = 0; i < zone.children.length; i++) {
-                var lineDiv = zone.children[i];
-                for (var j = 0; j < lineDiv.children.length; j++) {
-                    var div = lineDiv.children[j];
-                    div.style.width = squareSize + "px";
-                    div.style.height = squareSize + "px";
-                }
-            }
-        }
-    };
+                result = result.replace(";", "").replace(/\/\/(.+)/ig, "");
 
-    var clearBtn = document.getElementById("clear");
-    clearBtn.onclick = function () {
-        while (zone.firstChild) {
-            zone.firstChild.remove();
-        }
-        initializeSquares();
-    };
+                result = result.trim().replace(/\"/ig, "");
+                readableName = readableName.trim();
+                name = name.trim();
 
-    var txtArea = document.getElementById("txt-area");
-    var saveBtn = document.getElementById("save");
-    saveBtn.onclick = function () {
-        var ox = (columnsNbr() - 1) / 2;
-        var oy = (linesNbr() - 1) / 2;
-        var result = "\"";
-        for (var i = 0; i < zone.children.length; i++) {
-            var lineDiv = zone.children[i];
-            for (var j = 0; j < lineDiv.children.length; j++) {
-                var div = lineDiv.children[j];
-                var x = j - ox;
-                var y = i - oy;
-                if (div.className.match(/fill/i)) {
-                    result += "[cx+" + x + ",cy+" + y + "],";
+                var output_result = "";
+                if (result === "true" || result === "false") {
+                    output_result = "String(parameters[\"" + readableName + "\"] || '" + result + "') === 'true'";
+                } else if (!isNaN(result)) {
+                    output_result = "Number(parameters[\"" + readableName + "\"] || " + result + ")";
+                } else if (result.match(/String\((.+)\)/) || result.match(/Number\((.+)\)/)) {
+                    output_result = result;
+                } else {
+                    output_result = "String(parameters[\"" + readableName + "\"] || \"" + result + "\")";
                 }
+                output_parameters += module + "." + name + " = " + output_result + ";" + output_end + "\n";
+
+                output_header += "\n* @param " + readableName + "\n* @desc " + description + "\n* @default " + result + "\n*";
+            } else if (line.match(/\/\/\s*divider\s*:\s*(.+)/i)) {
+                output_header += "\n* @param " + RegExp.$1 + "\n* @desc " + "..." + "\n* @default \n*";
+                output_parameters += line;
+            } else {
+                output_parameters += "\n";
             }
         }
-        result += "eof";
-        result = result.replace(",eof", "")
-            .replace(/\+\-/g, "-")
-            .replace(/\+0/g, "");
-        result += "\"";
-        txtArea.value = result;
-        txtArea.select();
-    };
-    loadBtn = document.getElementById("import");
-    loadBtn.onclick = function () {
-        var result = txtArea.value.replace(/\"/g, "");
-        var cx = (columnsNbr() - 1) / 2;
-        var cy = (linesNbr() - 1) / 2;
-        var array = eval("[" + result + "]");
-        for (var i = 0; i < zone.children.length; i++) {
-            var lineDiv = zone.children[i];
-            for (var j = 0; j < lineDiv.children.length; j++) {
-                var div = lineDiv.children[j];
-                div.className = "square";
-                for (var k = 0; k < array.length; k++) {
-                    var coords = array[k];
-                    if (j === coords[0] && i === coords[1]) {
-                        div.className = "square-fill";
-                    }
-                }
-            }
-        }
-    };
-    initializeSquares();
+        document.getElementById('code').value = output_parameters;
+        document.getElementById('header').value = output_header;
+    }
 };
