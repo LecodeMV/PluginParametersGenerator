@@ -6,14 +6,19 @@ body {
 
 section {
     width: 70%;
+    margin: auto;
 }
 
-.container {
+#container {
     display: inline-block;
 }
 
 .form-control {
     font-size: 12px;
+}
+
+.form-group {
+    padding-top: 6px;
 }
 
 label {
