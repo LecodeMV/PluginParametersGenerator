@@ -97,7 +97,8 @@ window.onload = function () {
             "Lecode.MagicSteps.allowedMaps = \"[2,5,8]\";\n" +
             "// Divider: -- Window --\n" +
             "Lecode.MagicSteps.windowTitle = \"Magic Steps Effects\";\n" +
-            "Lecode.MagicSteps.showWindow = false;   // (Show Notification ?):\n";
+            "Lecode.MagicSteps.showWindow = false;   // (Show Notification ?):\n" +
+            "Lecode.MagicSteps.showIcon = String(parameters[\"Show Icon\"] || 'false') === 'true';\n";
         dataBox.getDoc().setValue(text);
         work();
     };
