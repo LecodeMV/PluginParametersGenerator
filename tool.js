@@ -40,7 +40,7 @@ window.onload = function () {
                 let name = RegExp.$1;
                 let result = RegExp.$2;
                 let readableName = "";
-                let description = "...";
+                let description = "[No description]";
                 let output_end = "";
                 if (result.match(/\/\/\s*\((.*)\)\s*:\s*(.*)/i)) {
                     readableName = RegExp.$1;
