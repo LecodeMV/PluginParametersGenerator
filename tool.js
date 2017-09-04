@@ -77,7 +77,7 @@ window.onload = function () {
 
                 output_header += "\n * @param " + readableName + "\n * @desc " + description + "\n * @default " + result + "\n *";
             } else if (line.match(/\/\/\s*divider\s*:\s*(.+)/i)) {
-                output_header += "\n* @param " + RegExp.$1 + "\n* @desc " + "..." + "\n* @default \n*";
+                output_header += "\n * @param " + RegExp.$1 + "\n * @desc " + "..." + "\n * @default \n *";
                 output_parameters += line + "\n";
             } else {
                 output_parameters += "\n";
