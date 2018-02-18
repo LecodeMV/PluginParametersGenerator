@@ -51,12 +51,12 @@ window.onload = function () {
                     output_end = "\t//\t(" + readableName + "): " + description;
                 } 
                 //- If match // (name): Or // (name)
-                else if (if (result.match(/\/\/\s*\((.*)\)/i)) {
+                else if (result.match(/\/\/\s*\((.*)\)/i)) {
                     readableName = RegExp.$1;
                     output_end = "\t//\t(" + readableName + ") ";
                 }
                 //- If match // description
-                else if (if (result.match(/\/\/\s*(.*)/i)) {
+                else if (result.match(/\/\/\s*(.*)/i)) {
                     description = RegExp.$1;
                     output_end = "\t//\t" + description;
                 }
