@@ -30,9 +30,11 @@ window.onload = function () {
         let data = dataBox.getDoc().getValue();
         let lines = data.split("\n");
         let module = "UnknowModule";
+        //- Find module
         if (lines[0].match(/(.+)\.(.+)\s*=\s*(.+);/i)) {
             module = RegExp.$1;
         }
+        //- For each lines in the data field
         for (let i = 0; i < lines.length; i++) {
             let line = lines[i];
             line = line.replace(module, "#");
@@ -42,17 +44,26 @@ window.onload = function () {
                 let readableName = "";
                 let description = "[No description]";
                 let output_end = "";
+                //- If match // (name): description
                 if (result.match(/\/\/\s*\((.*)\)\s*:\s*(.*)/i)) {
                     readableName = RegExp.$1;
                     description = RegExp.$2;
                     output_end = "\t//\t(" + readableName + "): " + description;
-                    if (readableName.length <= 0)
-                        readableName = makeSpacesAfterCapitalLetters(name);
-                    if (description.length <= 0)
-                        description = "[No description]";
-                } else {
-                    readableName = makeSpacesAfterCapitalLetters(name);
+                } 
+                //- If match // (name): Or // (name)
+                else if (if (result.match(/\/\/\s*\((.*)\)/i)) {
+                    readableName = RegExp.$1;
+                    output_end = "\t//\t(" + readableName + ") ";
                 }
+                //- If match // description
+                else if (if (result.match(/\/\/\s*(.*)/i)) {
+                    description = RegExp.$1;
+                    output_end = "\t//\t" + description;
+                }
+                if (readableName.length <= 0)
+                    readableName = makeSpacesAfterCapitalLetters(name);
+                if (description.length <= 0)
+                    description = "[No description]";
                 result = result.replace(";", "").replace(/\/\/(.+)/ig, "");
 
                 if (!result.match(/\|\|\s*(.+)\s*\)/i))
@@ -95,10 +106,10 @@ window.onload = function () {
 
     example = function () {
         var text = "Lecode.MagicSteps.goldGain = 30;    // (Gold): Amount of gold obtained.\n" +
-            "Lecode.MagicSteps.requiredSteps = 5;    // (): Required steps to gain rewards.\n" +
+            "Lecode.MagicSteps.requiredSteps = 5;    // Required steps to gain rewards.\n" +
             "Lecode.MagicSteps.allowedMaps = \"[2,5,8]\";\n" +
             "// Divider: -- Window --\n" +
-            "Lecode.MagicSteps.windowTitle = \"Magic Steps Effects\";\n" +
+            "Lecode.MagicSteps.windowTitle = \"Magic Steps Effects\";   // (Window Title)\n" +
             "Lecode.MagicSteps.showWindow = false;   // (Show Notification ?):\n" +
             "Lecode.MagicSteps.showIcon = String(parameters[\"Show Icon\"] || 'false') === 'true';\n";
         dataBox.getDoc().setValue(text);
